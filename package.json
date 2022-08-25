@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": " node index.js",
+    "build:ui": "rm -rf build && cd ../notes-app/react-notes-app/&& npm run build && cp -r build ../../notes-server/",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy", 
+    "deploy": "git push heroku main",
+
     "dev": " nodemon index.js"
   },
   "keywords": [],
