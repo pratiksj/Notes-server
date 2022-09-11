@@ -82,11 +82,11 @@ App.delete("/notes/:id", (request, response, next) => {
 });
 App.post("/notes", (request, response, next) => {
   const body = request.body;
-  //console.log("body.content is",body.content)
+  //console.log("body.content is", body.content);
 
-  if (body.content === "") {
-    return response.status(400).json({ error: "content missing" });
-  }
+  // if (body.content === "") {
+  //   return response.status(400).json({ error: "content missing" });
+  // }
 
   const note = new Note({
     content: body.content,
@@ -94,10 +94,12 @@ App.post("/notes", (request, response, next) => {
     date: new Date(),
   });
 
-  note.save().then((savedNote) => {
-    response.json(savedNote);
-  });
-  //.catch((error) => next(error));
+  note
+    .save()
+    .then((savedNote) => {
+      response.json(savedNote);
+    })
+    .catch((error) => next(error));
 });
 App.put("/notes/:id", (request, response, next) => {
   const body = request.body;
@@ -124,6 +126,7 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" });
   } else if (error.name === "ValidationError") {
+    console.log("Validation Errror");
     return response.status(400).json({ error: error.message });
   }
 
