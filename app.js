@@ -1,22 +1,24 @@
 const express = require("express");
 const cors = require("cors");
 const Note = require("./model/note");
+const middleware = require("./utills/middleware");
 
 const { response } = require("express");
 const App = express(); // app vannema server app banyooo
 App.use(express.static("build")); //this is also middleware
 App.use(cors());
 App.use(express.json());
+App.use(middleware.requestLogger);
 
-App.use((request, response, next) => {
-  //console.log("This is middleware")
-  console.log("Method:", request.method);
-  console.log("Path:  ", request.path);
-  console.log("Body:  ", request.body);
-  console.log("---");
-  response.someThis = "hellow there";
-  next(); //next must be call to run every code below otherwise it gets blocked
-});
+// App.use((request, response, next) => {
+//   //console.log("This is middleware")
+//   console.log("Method:", request.method);
+//   console.log("Path:  ", request.path);
+//   console.log("Body:  ", request.body);
+//   console.log("---");
+//   response.someThis = "hellow there";
+//   next(); //next must be call to run every code below otherwise it gets blocked
+// });
 
 //App.use(express.json())
 
@@ -82,11 +84,6 @@ App.delete("/notes/:id", (request, response, next) => {
 });
 App.post("/notes", (request, response, next) => {
   const body = request.body;
-  //console.log("body.content is", body.content);
-
-  // if (body.content === "") {
-  //   return response.status(400).json({ error: "content missing" });
-  // }
 
   const note = new Note({
     content: body.content,
@@ -123,22 +120,9 @@ App.put("/notes/:id", (request, response, next) => {
 App.use((request, response, next) => {
   response.status(404).send("<h1>No routes found for this request</h1>");
 });
-
-const errorHandler = (error, request, response, next) => {
-  console.error(error.message);
-
-  if (error.name === "CastError") {
-    return response.status(400).send({ error: "malformatted id" });
-  } else if (error.name === "ValidationError") {
-    console.log("Validation Errror");
-    return response.status(400).json({ error: error.message });
-  }
-
-  next(error);
-};
-
-// this has to be the last loaded middleware.
-App.use(errorHandler);
+App.use(middleware.unknownEndpoint);
+App.use(middleware.errorHandler);
+//App.use(errorHandler);
 
 // const PORT = process.env.PORT || "3001"; //kunai server ma chai default port hunca tei vayera ternaery
 
