@@ -10,7 +10,7 @@ App.use(express.static("build")); //this is also middleware
 App.use(cors());
 App.use(express.json());
 App.use(middleware.requestLogger);
-App.use("/notes", notesRouter);
+App.use("/api/notes", notesRouter);
 
 App.use(middleware.unknownEndpoint);
 App.use(middleware.errorHandler);
