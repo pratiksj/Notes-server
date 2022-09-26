@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 require("dotenv").config(); //dotenv install garepaci
+const config = require("../utills/config");
 
-const url = process.env.MONGODB_URI; //local host ko lagi matra ho
+const url = config.MONGODB_URI; //local host ko lagi matra ho
 
 console.log("connecting to", url);
 
