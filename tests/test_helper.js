@@ -17,7 +17,7 @@ const nonExistingId = async () => {
   const note = new Note({ content: "willremovethissoon", date: new Date() });
   await note.save();
   await note.remove();
-
+  //this function define ahead of time, that can be used for creating a database object ID that does not belong to any note object in the database
   return note._id.toString();
 };
 
