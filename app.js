@@ -5,12 +5,14 @@ const middleware = require("./utills/middleware");
 
 //const { response } = require("express");
 const notesRouter = require("./controllers/notes");
+const usersRouter = require("./controllers/users");
 const App = express(); // app vannema server app banyooo
 App.use(express.static("build")); //this is also middleware
 App.use(cors());
 App.use(express.json());
 App.use(middleware.requestLogger);
 App.use("/api/notes", notesRouter);
+App.use("/api/users", usersRouter);
 
 App.use(middleware.unknownEndpoint);
 App.use(middleware.errorHandler);

@@ -22,8 +22,14 @@ const noteSchema = new mongoose.Schema({
     required: true,
   },
   //content: String,
+
   date: Date,
   important: Boolean,
+
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 noteSchema.set("toJSON", {
