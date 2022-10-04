@@ -3,7 +3,7 @@ const Note = require("../model/note");
 const User = require("../model/user");
 
 notesRouter.get("/", async (request, response) => {
-  const myNotes = await Note.find({});
+  const myNotes = await Note.find({}).populate("user");
   response.json(myNotes);
 });
 // notesRouter.get("/", (request, response) => {
@@ -38,8 +38,10 @@ notesRouter.post("/", async (request, response, next) => {
   });
   try {
     const newNote = await note.save();
-    user.notes.concat(newNote._id);
-    user.save();
+    //user.notes.concat(newNote._id);
+    user.notes = user.notes.concat(newNote._id);
+    await user.save();
+    //user.save();
     response.status(201).json(newNote);
   } catch (error) {
     next(error);

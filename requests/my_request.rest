@@ -10,7 +10,7 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json     
 
 {
-"content":"bhairab",
+"content":"the jungle ",
 "important":true,
 "userId":"633c125f7523468e40c87a4a"
 
@@ -21,9 +21,9 @@ POST http://localhost:3001/api/users
 Content-Type: application/json     
 
 {
-"username":"Pratiksha",
-"name":"pratiksha",
-"password": "root"
+"username":"Akxita",
+"name":"usha rai",
+"password": "kalo"
 
 }
 
