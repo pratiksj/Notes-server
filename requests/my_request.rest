@@ -7,12 +7,12 @@ DELETE  http://localhost:3001/api/notes
 ###
 
 POST http://localhost:3001/api/notes
-Content-Type: application/json     
+Content-Type: application/json  
+Authorization: bearer JhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJpZCI6IjYzM2U5ODVjMjk4NjdhMjM4MjIwN2Q5NyIsImlhdCI6MTY2NTUwNDE0OX0.kkcWmZ5IVazxTdRSmJSE-7oPFVDHN2sUx39IL0AYN0M   
 
 {
-"content":"the jungle ",
-"important":true,
-"userId":"633c125f7523468e40c87a4a"
+"content":"the jungle of Nepal ",
+"important":true
 
 }
 
