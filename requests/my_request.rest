@@ -33,7 +33,6 @@ Content-Type: application/json
 
 {
 "username":"john",
-"name":"john",
-"password":"radar",
+"password":"radar"
 
 }
