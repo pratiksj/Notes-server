@@ -37,6 +37,7 @@ const getTokenFrom = (request) => {
 
 notesRouter.post("/", async (request, response, next) => {
   const body = request.body;
+  let newNote;
   try {
     const token = getTokenFrom(request);
     const decodedToken = jwt.verify(token, process.env.SECRET);
@@ -54,14 +55,14 @@ notesRouter.post("/", async (request, response, next) => {
       user: user._id,
     });
 
-    const newNote = await note.save();
+    newNote = await note.save();
     //user.notes.concat(newNote._id);
     user.notes = user.notes.concat(newNote._id);
     await user.save();
-    response.status(201).json(newNote);
   } catch (error) {
     next(error);
   }
+  response.status(201).json(newNote);
   //user.save();
 
   // note
