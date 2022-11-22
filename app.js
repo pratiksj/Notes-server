@@ -16,6 +16,11 @@ App.use("/api/notes", notesRouter);
 App.use("/api/users", usersRouter);
 App.use("/api/login", loginRouter);
 
+if (process.env.NODE_ENV === "test") {
+  const testingRouter = require("./controllers/testing");
+  App.use("/api/testing", testingRouter);
+}
+
 App.use(middleware.unknownEndpoint);
 App.use(middleware.errorHandler);
 module.exports = App;
